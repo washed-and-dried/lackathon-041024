@@ -1,4 +1,6 @@
+
 .navpane-container {
+    top: 0;
     padding-inline: 2em;
     display: flex;
     flex-direction: row;
