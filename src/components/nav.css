@@ -1,0 +1,19 @@
+.navpane-container {
+    padding-inline: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 100vw;
+}
+
+.navpane-container h1 {
+    margin: 0;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+
+}
