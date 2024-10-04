@@ -9,6 +9,8 @@ import {
     Graticule, Marker
 } from "react-simple-maps";
 import CountryCoords from "../../data/country_lat_long.json"
+import {useQuery} from "@tanstack/react-query"
+import {useNavigate} from "react-router-dom";
 
 const geoUrl = "./data/features.json";
 
@@ -16,30 +18,35 @@ const colorScale = scaleLinear()
     .domain([0.29, 0.68])
     .range(["#ffedea", "#ff5233"]);
 
-function handleClick(thing, setMarkers){
-    return async () => {
-        let countryName = thing.name;
-
-        const countryCoord = CountryCoords[countryName];
-
-        if (countryCoord !== undefined) {
-            setMarkers((oldMarkers) => {
-                return [...oldMarkers, {
-                    lat: countryCoord.latitude,
-                    long: countryCoord.longitude
-                }]
-            })
+function handleClick(thing, navigate) {
+    navigate("/add", {
+        state: {
+            countryName: thing.name
         }
-
-        const url = "http://localhost:4000/tree?pageNumber=0&descending=false&country=" + countryName;
-        const data = await fetch();
-        const jsonData = await data.json();
-    }
+    })
 }
 
 export default function Mamap() {
     const [data, setData] = useState([]);
-    const [markers, setMarkers] = useState([]);
+    const navigate = useNavigate();
+
+    const markers = useQuery({
+        queryKey: ['markers'],
+        queryFn: async () => {
+            const url = "http://localhost:4000/tree/all";
+            const res = await fetch(url);
+
+            const json = await res.json();
+            return json.data.map((marker) => {
+                const countryCoord = CountryCoords[marker.country];
+
+                return {
+                    lat: countryCoord.latitude,
+                    long: countryCoord.longitude
+                }
+            })
+        }
+    })
 
     useEffect(() => {
         csv(`./data/vulnerability.csv`).then((data) => {
@@ -59,7 +66,8 @@ export default function Mamap() {
             <Graticule stroke="#E4E5E6" strokeWidth={0.5}/>
             {data.length > 0 && (
                 <Geographies geography={geoUrl}>
-                    {({geographies}) =>
+                    {
+                        ({geographies}) =>
                         geographies.map((geo) => {
                             const d = data.find((s) => s.ISO3 === geo.id);
                             return (
@@ -67,7 +75,7 @@ export default function Mamap() {
                                     key={geo.rsmKey}
                                     geography={geo}
                                     fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
-                                    onClick={handleClick(geo.properties, setMarkers)}
+                                    onClick={() => handleClick(geo.properties, navigate)}
                                 />
                             );
                         })
@@ -75,13 +83,6 @@ export default function Mamap() {
                 </Geographies>
             )}
 
-            {markers.length > 0 && (
-                markers.map(marker => {
-                    return <Marker coordinates={[marker.long, marker.lat]}>
-                        <circle r={5} fill="#F53" />
-                    </Marker>
-                })
-            )}
         </ComposableMap>
     );
 };
