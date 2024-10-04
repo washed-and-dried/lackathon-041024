@@ -1,0 +1,138 @@
+{
+  "Andorra": {
+    "latitude": 42.546245,
+    "longitude": 1.601554
+  },
+  "United Arab Emirates": {
+    "latitude": 23.424076,
+    "longitude": 53.847818
+  },
+  "Afghanistan": {
+    "latitude": 33.93911,
+    "longitude": 67.709953
+  },
+  "Antigua and Barbuda": {
+    "latitude": 17.060816,
+    "longitude": -61.796428
+  },
+  "Anguilla": {
+    "latitude": 18.220554,
+    "longitude": -63.068615
+  },
+  "Albania": {
+    "latitude": 41.153332,
+    "longitude": 20.168331
+  },
+  "Armenia": {
+    "latitude": 40.069099,
+    "longitude": 45.038189
+  },
+  "Angola": {
+    "latitude": -11.202692,
+    "longitude": 17.873887
+  },
+  "Argentina": {
+    "latitude": -38.416097,
+    "longitude": -63.616672
+  },
+  "Austria": {
+    "latitude": 47.516231,
+    "longitude": 14.550072
+  },
+  "Australia": {
+    "latitude": -25.274398,
+    "longitude": 133.775136
+  },
+  "Azerbaijan": {
+    "latitude": 40.143105,
+    "longitude": 47.576927
+  },
+  "Bosnia and Herzegovina": {
+    "latitude": 43.915886,
+    "longitude": 17.679076
+  },
+  "Barbados": {
+    "latitude": 13.193887,
+    "longitude": -59.543198
+  },
+  "Bangladesh": {
+    "latitude": 23.684994,
+    "longitude": 90.356331
+  },
+  "Belgium": {
+    "latitude": 50.503887,
+    "longitude": 4.469936
+  },
+  "Burkina Faso": {
+    "latitude": 12.238333,
+    "longitude": -1.561593
+  },
+  "Bulgaria": {
+    "latitude": 42.733883,
+    "longitude": 25.48583
+  },
+  "Bahrain": {
+    "latitude": 25.930414,
+    "longitude": 50.637772
+  },
+  "Burundi": {
+    "latitude": -3.373056,
+    "longitude": 29.918886
+  },
+  "Benin": {
+    "latitude": 9.30769,
+    "longitude": 2.315834
+  },
+  "Brazil": {
+    "latitude": -14.235004,
+    "longitude": -51.92528
+  },
+  "Bahamas": {
+    "latitude": 25.03428,
+    "longitude": -77.39628
+  },
+  "Bhutan": {
+    "latitude": 27.514162,
+    "longitude": 90.433601
+  },
+  "Botswana": {
+    "latitude": -22.328474,
+    "longitude": 24.684866
+  },
+  "Belarus": {
+    "latitude": 53.709807,
+    "longitude": 27.953389
+  },
+  "Belize": {
+    "latitude": 17.189877,
+    "longitude": -88.49765
+  },
+  "Canada": {
+    "latitude": 56.130366,
+    "longitude": -106.346771
+  },
+  "Switzerland": {
+    "latitude": 46.818188,
+    "longitude": 8.227512
+  },
+  "Cote d'Ivoire": {
+    "latitude": 7.539989,
+    "longitude": -5.54708
+  },
+  "Chile": {
+    "latitude": -35.675147,
+    "longitude": -71.542969
+  },
+  "Cameroon": {
+    "latitude": 7.369722,
+    "longitude": 12.354722
+  },
+  "China": {
+    "latitude": 35.86166,
+    "longitude": 104.195397
+  },
+  "Colombia": {
+    "latitude": 4.570868,
+    "longitude": -74.297333
+  }
+}

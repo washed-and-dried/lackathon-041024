@@ -6,8 +6,9 @@ import {
     Geographies,
     Geography,
     Sphere,
-    Graticule
+    Graticule, Marker
 } from "react-simple-maps";
+import CountryCoords from "../../data/country_lat_long.json"
 
 const geoUrl = "./data/features.json";
 
@@ -15,21 +16,30 @@ const colorScale = scaleLinear()
     .domain([0.29, 0.68])
     .range(["#ffedea", "#ff5233"]);
 
-function handleClick(thing){
+function handleClick(thing, setMarkers){
     return async () => {
+        let countryName = thing.name;
 
-        const url = "";
-        console.log(thing.name)
-        const data = await fetch("http://localhost:4000/tree?pageNumber=0&descending=false&country=" + thing.name);
+        const countryCoord = CountryCoords[countryName];
 
-        console.log(data);
+        if (countryCoord !== undefined) {
+            setMarkers((oldMarkers) => {
+                return [...oldMarkers, {
+                    lat: countryCoord.latitude,
+                    long: countryCoord.longitude
+                }]
+            })
+        }
+
+        const url = "http://localhost:4000/tree?pageNumber=0&descending=false&country=" + countryName;
+        const data = await fetch();
         const jsonData = await data.json();
-        console.log(jsonData);
     }
 }
 
 export default function Mamap() {
     const [data, setData] = useState([]);
+    const [markers, setMarkers] = useState([]);
 
     useEffect(() => {
         csv(`./data/vulnerability.csv`).then((data) => {
@@ -57,12 +67,20 @@ export default function Mamap() {
                                     key={geo.rsmKey}
                                     geography={geo}
                                     fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
-                                    onClick={handleClick(geo.properties)}
+                                    onClick={handleClick(geo.properties, setMarkers)}
                                 />
                             );
                         })
                     }
                 </Geographies>
+            )}
+
+            {markers.length > 0 && (
+                markers.map(marker => {
+                    return <Marker coordinates={[marker.long, marker.lat]}>
+                        <circle r={5} fill="#F53" />
+                    </Marker>
+                })
             )}
         </ComposableMap>
     );
