@@ -19,7 +19,9 @@ function handleClick(thing){
     return async () => {
 
         const url = "";
-        const data = await fetch("localhost:4000/tree?pageNumber=0&descending=false&country=India");
+        console.log(thing.name)
+        const data = await fetch("http://localhost:4000/tree?pageNumber=0&descending=false&country=" + thing.name);
+
         console.log(data);
         const jsonData = await data.json();
         console.log(jsonData);
