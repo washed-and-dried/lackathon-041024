@@ -30,22 +30,24 @@ export default function Mamap() {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
+    let queryFn = async () => {
+        const url = "http://localhost:4000/tree/all";
+        const res = await fetch(url);
+
+        const json = await res.json();
+        const data = json.data.map((marker) => {
+            const countryCoord = CountryCoords[marker.country];
+
+            return {
+                lat: countryCoord.latitude,
+                long: countryCoord.longitude
+            }
+        })
+    }
+
     const markers = useQuery({
         queryKey: ['markers'],
-        queryFn: async () => {
-            const url = "http://localhost:4000/tree/all";
-            const res = await fetch(url);
-
-            const json = await res.json();
-            return json.data.map((marker) => {
-                const countryCoord = CountryCoords[marker.country];
-
-                return {
-                    lat: countryCoord.latitude,
-                    long: countryCoord.longitude
-                }
-            })
-        }
+        queryFn: queryFn
     })
 
     useEffect(() => {
@@ -68,17 +70,17 @@ export default function Mamap() {
                 <Geographies geography={geoUrl}>
                     {
                         ({geographies}) =>
-                        geographies.map((geo) => {
-                            const d = data.find((s) => s.ISO3 === geo.id);
-                            return (
-                                <Geography
-                                    key={geo.rsmKey}
-                                    geography={geo}
-                                    fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
-                                    onClick={() => handleClick(geo.properties, navigate)}
-                                />
-                            );
-                        })
+                            geographies.map((geo) => {
+                                const d = data.find((s) => s.ISO3 === geo.id);
+                                return (
+                                    <Geography
+                                        key={geo.rsmKey}
+                                        geography={geo}
+                                        fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
+                                        onClick={() => handleClick(geo.properties, navigate)}
+                                    />
+                                );
+                            })
                     }
                 </Geographies>
             )}
